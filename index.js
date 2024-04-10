@@ -43,7 +43,7 @@ const greet = async () => {
             var text = "【" + body[random].price +"円" + "】"
             var url = body[random].url;
             var title = body[random].title.substring(0,41);
-            client.v2.tweet(text + " " + url + " " +title + " #セール" + " #Amazon");
+            client.v2.tweet(text + " " + url + " " +title + " #セール #Amazon 相互フォロー #フォロバ100 #フォロバ");
             return true;
         }); 
     
