@@ -23,7 +23,7 @@ client.readWrite;
 const app = express();
 
 const greet = async () => {
-    https.get('https://amazon-explorer.onrender.com/search2', (resp) =>{
+    https.get(process.env.AMAZON_API_URL, (resp) =>{
         let data = ''; 
         // A chunk of data has been received. 
         resp.on('data', (chunk) => { 
