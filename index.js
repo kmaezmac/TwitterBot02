@@ -66,6 +66,59 @@ app.get("/tweet", (req, res) => {
     res.send('get');
 });
 
+app.get("/db", (req, res) => {
+    try {
+        select();
+    } catch (err) {
+        console.log(err);
+    }
+    res.send('get');
+});
+
+const select = async () => {
+    const pool = new pg.Pool({
+        database: process.env.DATABASE,
+        user: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD,
+        host: process.env.DATABASE_HOST,
+        ssl: {
+            rejectUnauthorized: false,
+        },
+        max: 10,
+    });
+
+    var random = 1000;
+
+    pool.query(
+        'SELECT * FROM public.amazon'
+    ).then(result => {
+        if (result.rows) {
+            var count = result.rows.length;
+            random = Math.floor(Math.random() * count) + 1;
+        }
+    })
+        .catch(err => {
+            console.log('err: ', err);
+        })
+        .then(() => {
+            var sql = 'SELECT * FROM public.amazon WHERE number = ' + random;
+            pool.query(
+                sql
+            ).then(result => {
+                if (result.rows) {
+                    client.v2.tweet(result.rows[0].content + " #PR #Amazon #相互フォロー");
+                }
+            })
+                .catch(err => {
+                    console.log('err: ', err);
+                })
+                .then(() => {
+                    console.log('切断');
+                    pool.end();
+                });
+        });
+}
+
 app.get("/", (req, res) => {
     try {
         console.log("ログ定期実行")
