@@ -43,7 +43,7 @@ const greet = async () => {
             var text = "【" + body[random].price +"円" + "】"
             var url = body[random].url;
             var title = body[random].title.substring(0,41);
-            client.v2.tweet(text + " " + url + " " +title + " #セール #Amazon #相互フォロー #フォロバ100 #フォロバ");
+            client.v2.tweet(text + " " + url + " " +title + " #セール #Amazon");
             return true;
         }); 
     
@@ -106,7 +106,7 @@ const select = async () => {
                 sql
             ).then(result => {
                 if (result.rows) {
-                    client.v2.tweet(result.rows[0].content + " #PR #Amazon #相互フォロー");
+                    client.v2.tweet(result.rows[0].content + " #PR #Amazon");
                 }
             })
                 .catch(err => {
