@@ -36,14 +36,14 @@ const greet = async () => {
             console.log(body); 
             console.log(body.length);
             if(body.length == 0){
-                return false;
+                greet();
             }
             var random = Math.floor(Math.random() * (body.length));
             console.log(random);
-            var text = "【" + body[random].price +"円" + "】"
+            var text = "【" + body[random].percentage +"%オフ" + "】"
             var url = body[random].url;
-            var title = body[random].title.substring(0,41);
-            client.v2.tweet(text + " " + url + " " +title + " #セール #Amazon");
+            var title = body[random].title.substring(0,88);
+            client.v2.tweet(text + " " + url + " " +title + " #セール #Amazon" );
             return true;
         }); 
     
@@ -51,15 +51,13 @@ const greet = async () => {
         console.log("Error: " + err.message); 
         return false;
     })
+
 };
 
 app.get("/tweet", (req, res) => {
     try {
-        var result = false;
-        while(!result){
-            result = greet();
-            console.log("りざると" + result);
-        }
+        greet();
+        
     } catch (err) {
         console.log(err);
     }
