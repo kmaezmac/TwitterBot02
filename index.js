@@ -64,6 +64,82 @@ app.get("/tweet", (req, res) => {
     res.send('get');
 });
 
+
+app.get("/tiktok", (req, res) => {
+    try {
+        var text = "【期間限定】今なら誰でも+" + process.env.TIKTOK_AMOUNT + "円ゲットできるよ\n招待URL: " + process.env.TIKTOK_URL + "\nルールを守らないとお金がもらえないので必ず↓を見て登録してね"
+        var random = Math.floor(Math.random() * (30));
+        const emojis = [
+            "😀",
+            "😆",
+            "🤣",
+            "😉",
+            "🥰",
+            "😍",
+            "🤩",
+            "😘",
+            "😚",
+            "😋",
+            "😝",
+            "🤑",
+            "🫣",
+            "🤫",
+            "🤔",
+            "🫡",
+            "😏",
+            "🥳",
+            "😎",
+            "😲",
+            "😮",
+            "😳",
+            "🥺",
+            "🥹",
+            "😻",
+            "🙊",
+            "💖",
+            "❤️‍🔥",
+            "💯",
+            "🐶",
+            "🐺",
+            "🐱",
+            "🐭",
+            "🐹",
+            "🐰",
+            "🐸",
+            "🐯",
+            "🐨",
+            "🐻",
+            "🐷",
+            "🐽",
+            "🐮",
+            "🐗",
+            "🐵",
+            "🐒",
+            "🐴",
+            "🐑",
+            "🐘",
+            "🐼",
+            "🐧",
+            "🐦",
+            "🐤",
+            "🐥",
+            "🐣",
+            "🐔",
+        ]
+        var random = emojis[Math.floor(Math.random()* emojis.length)];
+        console.log(random)
+        var hashTag = "\n#TikTokLite #ポイ活 #副業 #稼げる #TikTok";
+        var link = "\n" + process.env.HATENA_URL;
+        var tweet = text + random + hashTag + link;
+        console.log(tweet)
+        client.v2.tweet(tweet); 
+    } catch (err) {
+        console.log(err);
+    }
+    res.send('get');
+});
+
+
 app.get("/db", (req, res) => {
     try {
         select();
