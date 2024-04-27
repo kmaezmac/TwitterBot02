@@ -43,7 +43,7 @@ const greet = async () => {
             var text = "【" + body[random].percentage +"%オフ" + "】"
             var url = body[random].url;
             var title = body[random].title.substring(0,88);
-            client.v2.tweet(text + " " + url + " " +title + " #セール #Amazon" );
+            client.v2.tweet(text + " " + url + " " +title + " #セール #Amazon #ad #PR" );
             return true;
         }); 
     
